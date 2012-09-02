@@ -20,7 +20,7 @@
 <%--<form action="ShowFile.do" method="get" title="跳转首页">--%>
     <%--<input type="submit" value="跳转到首页" style="width:70px;height:20px">--%>
 <%--</form>--%>
-<%--<form action="OpenSubject.do?name=<%=request.getAttribute("filename")%>" method="get" title="回到原帖">--%>
+<%--<form action="OpenSubject.do?name=" method="get" title="回到原帖">--%>
     <%--<input type="submit" value="回到原帖" style="width:70px;height:20px">--%>
 <%--</form>--%>
 

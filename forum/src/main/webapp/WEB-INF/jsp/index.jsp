@@ -9,6 +9,7 @@
 </head>
 <body>
 <p>This is a Public Forum!</p>
+<img src="image/o_TWLogo.jpeg" width="200" height="70" alt="论坛首页">
 <br/>
 
 <p>发布主题</p>
@@ -20,6 +21,7 @@
     <input type="submit" value="发布" style="width:50px;height:20px">
 </form>
 <br/>
+<p>热门话题</p>
 <%
     ArrayList array = (ArrayList) request.getAttribute("topics");
 
