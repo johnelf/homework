@@ -24,7 +24,7 @@
     ArrayList array = (ArrayList) request.getAttribute("topics");
 
     for (int i = 0; i < array.size(); i++) {
-        out.println("<a href=\"openSubject?name=" + array.get(i) + "\" >" + array.get(i) + "</a><br />");
+        out.println("<a href=\"OpenSubject.do?name=" + array.get(i) + "\" >" + array.get(i) + "</a><br />");
     }
 %>
 
