@@ -24,7 +24,7 @@
 
 <p>添加评论：</p>
 
-<form action="AddComment.do?filename=<%=request.getAttribute("name")%>" method="post" title="发布主题">
+<form action="AddComment.do?filename=${name}" method="post" title="发布主题">
     <textarea name="comment" rows="4" cols="120"></textarea> <br/>
     <input type="submit" value="发布" style="width:50px;height:20px">
 </form>
