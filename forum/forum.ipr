@@ -41,6 +41,7 @@
             <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.1.2.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.1.2.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-web:3.1.2.RELEASE" />
+            <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           </element>
         </element>
       </root>
@@ -74,6 +75,7 @@
   </component>
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$USER_HOME$/hungry" charset="UTF-8" />
   </component>
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
@@ -381,6 +383,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/javax/javaee-web-api/6.0/javaee-web-api-6.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: jstl:jstl:1.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/jstl/jstl/1.2/jstl-1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/jstl/jstl/1.2/jstl-1.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/jstl/jstl/1.2/jstl-1.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.eclipse.jetty:jetty-continuation:8.1.0.RC5">
