@@ -50,6 +50,6 @@ public class ShowFileController implements Controller {
         readFileByLines("src/main/webapp/topics.txt");
         request.setAttribute("topics", topics);
 
-        return new ModelAndView("/WEB-INF/jsp/index.jsp");
+        return new ModelAndView("/WEB-INF/jsp/forum.jsp");
     }
 }

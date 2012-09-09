@@ -3,3 +3,4 @@ git.ipr
 git.iws
 target/
 .gitignore
+forum/forum.iws
