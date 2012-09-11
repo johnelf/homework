@@ -1,5 +1,6 @@
 package com.jinwen;
 
+import com.database.DBOperation;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
@@ -45,9 +46,12 @@ public class ShowFileController implements Controller {
         }
     }
 
+    public void getTopics(){
+        topics = DBOperation.getINSTANCE().ExecuteQuerySQL("select name from article", "name");
+    }
+
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.topics.clear();
-        readFileByLines("src/main/webapp/topics.txt");
+        getTopics();
         request.setAttribute("topics", topics);
 
         return new ModelAndView("/WEB-INF/jsp/forum.jsp");

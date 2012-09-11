@@ -1,12 +1,13 @@
 package com.jinwen;
 
+import com.database.DBOperation;
+import com.dateformat.DataFormat;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -18,26 +19,20 @@ import java.io.IOException;
  */
 public class AddCommentController implements Controller {
 
-    private String Filename = new String();
-
     public void AddComment(HttpServletRequest request) {
 
-        String fileName = request.getParameter("filename");
+        String name = request.getParameter("filename");
         String content = request.getParameter("comment");
+        String sql = "insert into comment values(" + "\'" + name + "\'";
+        sql += ", \'" + content + "\', " + "\'" + DataFormat.getDate() + "\')";
 
-        try {
-            FileWriter writer = new FileWriter("src/main/webapp/" + fileName + ".txt", true);
-            writer.write(content + "\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        DBOperation.getINSTANCE().ExecuteInsertSQL(sql);
     }
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         AddComment(request);
-        Filename = request.getParameter("filename");
+        String Filename = request.getParameter("filename");
         request.setAttribute("filename", Filename);
 
         return new ModelAndView("/WEB-INF/jsp/comment.jsp");

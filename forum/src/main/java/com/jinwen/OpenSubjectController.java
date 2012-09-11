@@ -1,14 +1,12 @@
 package com.jinwen;
 
+import com.database.DBOperation;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -24,54 +22,26 @@ public class OpenSubjectController implements Controller {
     private ArrayList<String> art = new ArrayList<String>();
     private ArrayList<String> comment = new ArrayList<String>();
 
-    protected void OpenArticle(String Filename)
+    protected void OpenArticle(String ArticleName)
             throws ServletException, IOException {
+        String sql = "select content from article where name=" + "\'" + ArticleName + "\'";
+        art = DBOperation.getINSTANCE().ExecuteQuerySQL(sql, "content");
 
-        File f = new File("src/main/webapp/" + Filename + ".txt");
-        if (f.exists()) {
-            System.out.print("文件存在");
-        } else {
-            System.out.print("文件不存在");
-            f.createNewFile();
-        }
-
-        BufferedReader reader = new BufferedReader(new FileReader(f));
-        String tempString = null;
-        boolean flag = false;
-        int line = 1;
-
-        tempString = reader.readLine();
-        while (tempString != null) {
-            if (tempString.startsWith("=")) {
-                flag = true;
-                tempString = reader.readLine();
-                continue;
-            }
-            if (!flag) {
-                art.add(tempString);
-            } else {
-                comment.add(tempString);
-            }
-
-            tempString = reader.readLine();
-            line++;
-        }
-
-        reader.close();
+        sql = "select a.content from comment a,article b where a.name=b.name" +
+                " and b.name=" + "\'" + ArticleName + "\'" +
+                " order by a.postDate asc";
+        comment = DBOperation.getINSTANCE().ExecuteQuerySQL(sql, "content");
     }
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        art.clear();
-        comment.clear();
-        System.out.println(request.getParameter("name"));
-
-        this.OpenArticle(request.getParameter("name"));
+        OpenArticle(request.getParameter("name"));
         request.setAttribute("name", request.getParameter("name"));
         request.setAttribute("art", art);
         request.setAttribute("comment", comment);
 
-        System.out.println(art.size());
+        System.out.println(art.get(0));
+        System.out.println("art: " + art.size());
         System.out.println(comment.size());
         return new ModelAndView("/WEB-INF/jsp/article.jsp");
     }

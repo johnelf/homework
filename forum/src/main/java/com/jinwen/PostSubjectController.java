@@ -1,12 +1,14 @@
 package com.jinwen;
 
+import com.database.DBOperation;
+import com.dateformat.DataFormat;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,46 +19,18 @@ import java.io.*;
  */
 public class PostSubjectController implements Controller {
 
-    protected void AppendArticle(String filename, String content){
-        BufferedWriter out = null;
-        try {
-            out = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(filename, true)));
-            out.write(content + "\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    protected void PostArticle(HttpServletRequest request, HttpServletResponse response)
+    protected void PostArticle(HttpServletRequest request)
             throws ServletException, IOException {
-        String tmp = request.getParameter("subject");
-        tmp = request.getParameter("context");
+        String name = request.getParameter("subject");
+        String sql = "insert into article values(" + "\'" + name + "\'";
+        String content = request.getParameter("context");
+        sql += ", \'" + content + "\', " + "\'" + DataFormat.getDate() + "\')";
 
-        File f = new File("src/main/webapp/" + tmp + ".txt");
-        if (f.exists()) {
-            System.out.print("文件存在");
-        } else {
-            System.out.print("文件不存在");
-            f.createNewFile();
-        }
-        FileOutputStream out = new FileOutputStream(f);
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(out));
-        bw.write(tmp);
-        bw.flush();
-        bw.close();
-
-        AppendArticle("src/main/webapp/topics.txt", tmp);
+        DBOperation.getINSTANCE().ExecuteInsertSQL(sql);
     }
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PostArticle(request, response);
+        PostArticle(request);
 
         return new ModelAndView("/WEB-INF/jsp/success.jsp");
     }
