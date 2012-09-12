@@ -1,0 +1,8 @@
+git.iml
+git.ipr
+git.iws
+target/
+forum.iws
+forum.iml
+forum.ipr
+*.txt
